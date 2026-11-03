@@ -1,0 +1,162 @@
+/* ===== Cores e base ===== */
+:root {
+  --rosa-fundo: #fde8ee;
+  --rosa: #c2184f;
+  --vinho: #7a0c2e;
+  --texto: #2b2b2b;
+  --cinza: #6b6b6b;
+  --borda: #e8dde1;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; font-family: "Lato", "Segoe UI", Arial, sans-serif; color: var(--texto); background: #fff; font-size: 15px; }
+h1, h2, h3, h4 { color: var(--vinho); margin: 0 0 6px; }
+h1 { font-size: 2rem; }
+h3 { font-size: 1.05rem; }
+p { margin: 4px 0; }
+a { color: var(--rosa); }
+.pequeno { font-size: 0.8rem; color: var(--cinza); }
+.centro { text-align: center; display: block; }
+.erro { color: var(--rosa); font-size: 0.8rem; min-height: 1em; font-weight: 600; }
+.logo { font-weight: 800; color: var(--rosa); font-size: 1.3rem; }
+.logo b { color: var(--rosa); }
+.fundo-rosa { background: var(--rosa-fundo); }
+.conteudo { max-width: 1050px; margin: 0 auto; padding: 24px 20px 40px; }
+
+/* ===== Cartões, botões e campos ===== */
+.card { background: #fff; border: 1px solid var(--borda); border-radius: 10px; padding: 18px; margin-bottom: 16px; }
+.btn { border: 1.5px solid var(--rosa); border-radius: 8px; padding: 10px 16px; font-weight: 700; cursor: pointer; font-size: 0.9rem; background: #fff; color: var(--rosa); }
+.btn-primario { background: var(--rosa); color: #fff; }
+.btn-primario:hover { background: var(--vinho); }
+.btn-contorno:hover { background: var(--rosa-fundo); }
+.btn-amarelo { border-color: #c79a1c; color: #8a6a00; background: #fff; }
+.btn-amarelo:hover { background: #fff6d6; }
+.btn-perigo { background: var(--rosa); color: #fff; }
+.cheio { width: 100%; margin: 10px 0 4px; }
+.botoes { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.link { background: none; border: none; color: var(--rosa); font-weight: 700; cursor: pointer; text-decoration: underline; }
+.btn-mini { border: 1px solid var(--borda); background: #fff; border-radius: 6px; cursor: pointer; padding: 2px 8px; }
+label { display: block; font-weight: 700; font-size: 0.8rem; margin: 12px 0 5px; }
+input[type=text], input[type=password], input[type=date], input[type=time], select, textarea {
+  width: 100%; padding: 10px; border: 1px solid var(--borda); border-radius: 8px; font: inherit; background: #fff;
+}
+input[readonly] { background: #f1ecee; color: var(--cinza); }
+input:focus, select:focus, textarea:focus, button:focus-visible { outline: 2px solid var(--rosa); outline-offset: 1px; }
+hr { border: 0; border-top: 1px solid var(--borda); margin: 18px 0; }
+.duas { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+/* opções em "pílulas" (especialidade, prioridade) */
+.pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--borda); border-radius: 8px; padding: 7px 10px; font-size: 0.8rem; font-weight: 700; margin: 0; cursor: pointer; }
+.pill:has(input:checked) { border-color: var(--rosa); background: var(--rosa-fundo); color: var(--rosa); }
+.pill input { accent-color: var(--rosa); margin: 0; }
+
+/* ===== Login ===== */
+.login-topo { padding: 12px 40px; border-bottom: 1px solid var(--borda); }
+.login-corpo { display: grid; grid-template-columns: 1fr 1fr; min-height: calc(100vh - 56px); }
+.login-lado { background: var(--rosa-fundo); padding: 60px; display: flex; flex-direction: column; justify-content: center; }
+.login-lado h1 { max-width: 400px; }
+.login-lado p { max-width: 400px; color: var(--cinza); }
+.login-area { display: flex; align-items: center; justify-content: center; padding: 20px; }
+.login-card { width: 100%; max-width: 340px; }
+.login-card .btn { width: 100%; margin: 12px 0; }
+.senha-box { position: relative; }
+.senha-box .link { position: absolute; right: 10px; top: 9px; text-decoration: none; }
+
+/* ===== Topo do sistema ===== */
+.topo { display: flex; align-items: center; justify-content: space-between; padding: 10px 40px; border-bottom: 1px solid var(--borda); background: #fff; position: sticky; top: 0; z-index: 5; }
+.topo nav { display: flex; gap: 24px; }
+.topo nav a { text-decoration: none; color: var(--texto); font-weight: 700; padding-bottom: 4px; border-bottom: 2px solid transparent; }
+.topo nav a.ativo { color: var(--rosa); border-color: var(--rosa); }
+.usuario { font-size: 0.8rem; color: var(--cinza); }
+
+/* ===== Início ===== */
+.hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; align-items: center; padding: 50px 60px; }
+.hero h1 { font-size: 2.4rem; }
+.hoje { margin: 0; }
+.item-hoje { display: flex; align-items: center; gap: 14px; padding: 9px 0; border-top: 1px solid var(--borda); }
+.item-hoje .hora { color: var(--rosa); font-weight: 800; width: 50px; }
+.item-hoje .quem { flex: 1; font-size: 0.9rem; }
+.item-hoje .quem small { display: block; color: var(--cinza); font-size: 0.75rem; }
+.vazio { text-align: center; color: var(--cinza); padding: 20px; }
+.grade-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 14px; }
+.icone { display: inline-block; background: var(--rosa-fundo); color: var(--rosa); border-radius: 8px; width: 32px; height: 32px; text-align: center; line-height: 32px; font-weight: 800; margin-bottom: 8px; }
+.rodape { background: var(--vinho); color: #fff; display: grid; grid-template-columns: repeat(3, 1fr); padding: 22px 60px; font-size: 0.8rem; gap: 20px; }
+
+/* ===== Selos de status ===== */
+.selo { display: inline-block; border: 1px solid; border-radius: 99px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700; font-style: italic; white-space: nowrap; }
+.s-Presente { background: #e5f6e8; color: #1e6b32; border-color: #a9d9b3; }
+.s-Reagendada { background: #fff3cc; color: #8a6a00; border-color: #ecd47a; }
+.s-Ausente { background: #fde4e8; color: #b0123d; border-color: #f2a9b9; }
+.s-Agendada { background: #e4ebfb; color: #25408f; border-color: #b4c3ef; }
+.s-Cancelada { background: #eee; color: #555; border-color: #ccc; }
+.s-Enviada { background: #e5f6e8; color: #1e6b32; border-color: #a9d9b3; }
+.s-Falha { background: #fde4e8; color: #b0123d; border-color: #f2a9b9; }
+.s-Nao { background: #e4ebfb; color: #25408f; border-color: #b4c3ef; }
+.tag-obs { background: var(--rosa-fundo); color: var(--rosa); font-weight: 700; font-size: 0.72rem; padding: 2px 8px; border-radius: 6px; }
+
+/* ===== Agenda / tabelas ===== */
+.linha-titulo { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; }
+.filtros { display: flex; gap: 16px; align-items: flex-end; flex-wrap: wrap; }
+.filtros > div { min-width: 170px; }
+.filtros select { margin-top: 0; }
+.tabela-box { padding: 0; overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th { text-align: left; font-size: 0.75rem; color: var(--cinza); padding: 10px 14px; background: #fdf3f6; }
+td { padding: 11px 14px; border-top: 1px solid var(--borda); font-size: 0.85rem; vertical-align: middle; }
+td small { display: block; color: var(--cinza); }
+.data-hora b { color: var(--rosa); display: block; }
+.data-hora small { color: var(--rosa); font-weight: 700; }
+
+/* ===== Nova consulta / editar ===== */
+.duas-colunas { display: grid; grid-template-columns: 1fr 320px; gap: 18px; align-items: start; margin-top: 14px; }
+.linha-horario { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--borda); font-size: 0.8rem; }
+.linha-horario b { color: var(--rosa); }
+.linha-horario.escolhido { background: var(--rosa-fundo); padding-left: 6px; font-weight: 700; }
+.opcao-status { display: flex; align-items: center; gap: 8px; border: 1px solid var(--borda); border-radius: 8px; padding: 9px 10px; margin: 0 0 8px; font-size: 0.85rem; cursor: pointer; }
+.opcao-status:has(input:checked) { border-color: var(--rosa); background: var(--rosa-fundo); color: var(--rosa); }
+.opcao-status input { accent-color: var(--rosa); }
+.titulo-consulta { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+
+/* ===== Lembretes ===== */
+.previa { background: var(--rosa-fundo); border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.85rem; }
+.linha-info { display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--cinza); }
+.linha-info b { color: var(--texto); }
+td input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--rosa); }
+
+/* ===== Horários ===== */
+.semana { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+.nav-semana { display: flex; gap: 10px; align-items: center; color: var(--vinho); }
+.legenda { font-size: 0.8rem; color: var(--cinza); }
+.livre { color: #1e6b32; font-weight: 700; }
+.ocupado { color: var(--vinho); font-weight: 700; }
+.grade-horarios th { text-align: center; }
+.grade-horarios td { padding: 6px; border: 0; }
+.grade-horarios td:first-child { color: var(--rosa); font-weight: 700; }
+.celula { display: block; width: 100%; padding: 9px; border-radius: 8px; text-align: center; font-size: 0.8rem; font-weight: 700; font: inherit; font-weight: 700; }
+.celula.livre { border: 1px dashed #7fb88b; background: #fff; cursor: pointer; }
+.celula.livre:hover { background: #e5f6e8; }
+.celula.ocupado { border: 1px solid #f3c1cd; background: #fde4e8; }
+.hoje-col { background: #fde8ee; }
+
+/* ===== Janela de confirmação ===== */
+.modal { position: fixed; inset: 0; background: rgba(122, 12, 46, 0.35); display: flex; align-items: center; justify-content: center; z-index: 20; }
+.modal-caixa { background: #fff; border-radius: 12px; padding: 24px; width: 92%; max-width: 360px; }
+.modal-icone { font-size: 1.8rem; }
+.modal-resumo { background: var(--rosa-fundo); border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.85rem; }
+.modal-resumo small { display: block; color: var(--cinza); }
+
+/* ===== Celular ===== */
+@media (max-width: 800px) {
+  .login-corpo, .hero, .duas-colunas, .grade-4, .rodape { grid-template-columns: 1fr; }
+  .topo { padding: 10px 14px; flex-wrap: wrap; gap: 8px; }
+  .hero { padding: 24px 16px; }
+  .login-lado { padding: 30px 20px; }
+}
+
+/* ===== Impressão (Exportar em PDF) ===== */
+@media print {
+  .topo, .filtros, .botoes, .linha-titulo .botoes, .no-print, .rodape { display: none !important; }
+  .fundo-rosa { background: #fff; }
+  .card { border: 0; }
+}

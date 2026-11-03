@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Casa Rosa - Agenda da Casa da Mulher</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- ========== HU01: LOGIN ========== -->
+  <section id="login">
+    <div class="login-topo"><span class="logo">🏠 Casa<b>Rosa</b></span></div>
+    <div class="login-corpo">
+      <div class="login-lado">
+        <h1>Agenda da Casa da Mulher</h1>
+        <p>Entre com o seu acesso para cadastrar consultas, acompanhar o dia da equipe e avisar as pacientes.</p>
+      </div>
+      <div class="login-area">
+        <form id="form-login" class="card login-card">
+          <h2>Entrar no sistema</h2>
+          <p class="pequeno">Use o usuário e a senha que você recebeu.</p>
+          <label>Usuário</label>
+          <input id="login-usuario" type="text" placeholder="Coloque o nome do usuario">
+          <label>Senha</label>
+          <div class="senha-box">
+            <input id="login-senha" type="password">
+            <button type="button" id="btn-mostrar" class="link">Mostrar</button>
+          </div>
+          <p id="login-erro" class="erro"></p>
+          <button type="submit" class="btn btn-primario">Entrar</button>
+          <a href="#" id="esqueci" class="link centro">Esqueci minha senha</a>
+          <p class="pequeno centro">Problemas para entrar? Fale com a coordenação da Casa Rosa.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SISTEMA (depois do login) ========== -->
+  <div id="app" hidden>
+    <header class="topo">
+      <span class="logo">🏠 Casa<b>Rosa</b></span>
+      <nav>
+        <a href="#" data-ir="inicio">Início</a>
+        <a href="#" data-ir="agenda">Agenda</a>
+        <a href="#" data-ir="horarios">Horários</a>
+        <a href="#" data-ir="lembretes">Lembretes</a>
+      </nav>
+      <span class="usuario"><span id="nome-usuario"></span> | <a href="#" id="btn-sair">Sair</a></span>
+    </header>
+
+    <main>
+
+      <!-- ========== HU03: DASHBOARD ========== -->
+      <section id="pg-inicio" class="pagina">
+        <div class="fundo-rosa hero">
+          <div>
+            <p class="pequeno" id="boas-vindas"></p>
+            <h1>Agenda da Casa da Mulher</h1>
+            <p>Cadastre consultas e acompanhe o dia da equipe em um só lugar.</p>
+            <div class="botoes">
+              <button class="btn btn-primario" data-ir="nova">+ Nova consulta</button>
+              <button class="btn btn-contorno" data-ir="agenda">Ver agenda</button>
+            </div>
+          </div>
+          <div class="card hoje">
+            <h3>Consultas de hoje</h3>
+            <p class="pequeno" id="data-hoje"></p>
+            <div id="lista-hoje"></div>
+          </div>
+        </div>
+        <div class="conteudo">
+          <h2 class="titulo">Valores da Casa Rosa</h2>
+          <p class="pequeno">Cuidado e acolhimento para as mulheres da comunidade.</p>
+          <div class="grade-4">
+            <div class="card"><span class="icone">+</span>
+              <h4>Atendimentos</h4>
+              <p class="pequeno">Consultas e retornos com médicos e profissionais da equipe.</p>
+            </div>
+            <div class="card"><span class="icone">✚</span>
+              <h4>Procedimentos</h4>
+              <p class="pequeno">Pré-natal, ultrassom, implanon, preventivo, fisioterapia e mais.</p>
+            </div>
+            <div class="card"><span class="icone">♀</span>
+              <h4>Público atendido</h4>
+              <p class="pequeno">Mulheres que buscam cuidado com a saúde e acolhimento.</p>
+            </div>
+            <div class="card"><span class="icone">♡</span>
+              <h4>Função social</h4>
+              <p class="pequeno">Levar saúde e apoio a quem mais precisa, com atendimento organizado.</p>
+            </div>
+          </div>
+        </div>
+        <footer class="rodape">
+          <div><b>Casa da Mulher – Casa Rosa</b><br>Sistema de agendamento de consultas</div>
+          <div>Endereço da unidade<br>Segunda a sexta, horário de atendimento</div>
+          <div>Telefone: (00) 0000-0000<br>Acessibilidade e ajuda</div>
+        </footer>
+      </section>
+
+      <!-- ========== HU05 + HU12: AGENDA ========== -->
+      <section id="pg-agenda" class="pagina fundo-rosa" hidden>
+        <div class="conteudo">
+          <div class="linha-titulo">
+            <div>
+              <h1>Agenda</h1>
+              <p class="pequeno">Consultas em ordem de data, da mais próxima para a mais distante.</p>
+            </div>
+            <div class="botoes">
+              <button class="btn btn-contorno" id="btn-pdf">⬇ Exportar em PDF</button>
+              <button class="btn btn-primario" data-ir="nova">+ Nova consulta</button>
+            </div>
+          </div>
+
+          <!-- HU06: filtros -->
+          <div class="card filtros">
+            <div><label>Data</label><select id="filtro-data"></select></div>
+            <div><label>Status</label><select id="filtro-status"></select></div>
+            <div><label>Especialidade (A–Z)</label><select id="filtro-esp"></select></div>
+            <p class="pequeno">A exportação em PDF segue os filtros escolhidos.</p>
+          </div>
+
+          <div class="card tabela-box">
+            <table>
+              <thead>
+                <tr>
+                  <th>Data e hora</th>
+                  <th>Paciente</th>
+                  <th>Telefone</th>
+                  <th>Bairro</th>
+                  <th>Especialidade</th>
+                  <th>Observação</th>
+                  <th>Status</th>
+                  <th class="no-print"></th>
+                </tr>
+              </thead>
+              <tbody id="tabela-agenda"></tbody>
+            </table>
+            <p id="agenda-vazia" class="vazio" hidden>Não há consultas para exibir.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== HU04 (nova) / HU07, HU08, HU09, HU10 (editar) ========== -->
+      <section id="pg-consulta" class="pagina fundo-rosa" hidden>
+        <div class="conteudo">
+          <p class="pequeno" id="migalha"></p>
+          <h1 id="titulo-consulta"></h1>
+          <p class="pequeno" id="sub-consulta"></p>
+
+          <div class="duas-colunas">
+            <form id="form-consulta" class="card" novalidate>
+              <h3>Dados da paciente</h3>
+              <label>Nome da paciente *</label>
+              <input id="f-nome" type="text">
+              <div class="duas">
+                <div><label>Data de nascimento *</label><input id="f-nasc" type="date"></div>
+                <div><label>Telefone para contato *</label><input id="f-tel" type="text" placeholder="(88) 99999-0000">
+                </div>
+              </div>
+              <label>Endereço (bairro) *</label>
+              <input id="f-bairro" type="text">
+
+              <hr>
+              <h3>Consulta</h3>
+              <label>Especialidade *</label>
+              <div class="pills" id="f-esp"></div>
+              <div class="duas">
+                <div><label>Data *</label><input id="f-data" type="date"></div>
+                <div><label>Hora *</label><input id="f-hora" type="time"></div>
+              </div>
+              <label>Grau de prioridade *</label>
+              <div class="pills" id="f-prio"></div>
+              <label>Observação</label>
+              <textarea id="f-obs" rows="2"></textarea>
+              <p class="pequeno">Opcional. Use para risco, gestante, obesidade etc. Não registre dados de prontuário.
+              </p>
+              <label>Atendente que cadastrou</label>
+              <input id="f-atendente" type="text" readonly>
+
+              <p id="form-erro" class="erro"></p>
+              <div class="botoes">
+                <button type="submit" class="btn btn-primario" id="btn-salvar"></button>
+                <button type="button" class="btn btn-contorno" id="btn-voltar"></button>
+              </div>
+            </form>
+
+            <!-- lateral da NOVA consulta: horários do dia -->
+            <aside id="lado-nova">
+              <div class="card">
+                <h3 id="lado-titulo"></h3>
+                <p class="pequeno">Veja o que já está reservado antes de escolher.</p>
+                <div id="lado-lista"></div>
+              </div>
+            </aside>
+
+            <!-- lateral da EDIÇÃO: status e outras ações -->
+            <aside id="lado-editar" hidden>
+              <div class="card">
+                <h3>Alterar status</h3>
+                <div id="opcoes-status"></div>
+                <button class="btn btn-primario cheio" id="btn-salvar-status">Salvar status</button>
+              </div>
+              <div class="card">
+                <h3>Outras ações</h3>
+                <button class="btn btn-amarelo cheio" id="btn-cancelar">Cancelar consulta</button>
+                <p class="pequeno">A consulta fica registrada como "Cancelada" e o horário é liberado.</p>
+                <button class="btn btn-primario cheio" id="btn-excluir">Excluir consulta</button>
+                <p class="pequeno">Remove a consulta da agenda. Pede confirmação.</p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== HU11: LEMBRETES ========== -->
+      <section id="pg-lembretes" class="pagina fundo-rosa" hidden>
+        <div class="conteudo">
+          <h1>Lembretes</h1>
+          <p class="pequeno">Escolha as pacientes e o modelo de mensagem. O envio por WhatsApp só acontece depois que
+            você confirmar.</p>
+          <div class="duas-colunas">
+            <div class="card tabela-box">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Paciente</th>
+                    <th>Consulta</th>
+                    <th>Envio</th>
+                  </tr>
+                </thead>
+                <tbody id="tabela-lembretes"></tbody>
+              </table>
+            </div>
+            <aside>
+              <div class="card">
+                <h3>Modelo da mensagem</h3>
+                <select id="modelo-select"></select>
+                <div class="previa" id="modelo-previa"></div>
+                <a href="#" class="link" id="editar-modelos">Editar modelos</a>
+              </div>
+              <div class="card">
+                <h3>Pronto para enviar</h3>
+                <p class="linha-info"><span>Pacientes selecionadas</span><b id="qtd-sel">0</b></p>
+                <p class="linha-info"><span>Canal</span><b>WhatsApp</b></p>
+                <button class="btn btn-primario cheio" id="btn-enviar">Enviar mensagem de confirmação</button>
+                <p id="lembrete-aviso" class="erro"></p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== HU13: HORÁRIOS ========== -->
+      <section id="pg-horarios" class="pagina fundo-rosa" hidden>
+        <div class="conteudo">
+          <div class="linha-titulo">
+            <div>
+              <h1>Horários disponíveis</h1>
+              <p class="pequeno">Veja os períodos livres e ocupados antes de agendar.</p>
+            </div>
+            <button class="btn btn-primario" data-ir="nova">+ Nova consulta</button>
+          </div>
+          <div class="card semana">
+            <div class="nav-semana">
+              <button class="btn-mini" id="sem-ant">‹</button>
+              <b id="semana-titulo"></b>
+              <button class="btn-mini" id="sem-prox">›</button>
+            </div>
+            <div class="legenda"><span class="livre">+ Livre</span> <span class="ocupado">● Ocupado</span> Consultas
+              canceladas liberam o horário.</div>
+          </div>
+          <div class="card tabela-box">
+            <table class="grade-horarios">
+              <thead id="horarios-cab"></thead>
+              <tbody id="horarios-corpo"></tbody>
+            </table>
+          </div>
+          <p class="pequeno">Clique em um horário livre para abrir a Nova consulta já com data e hora preenchidas.</p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- janela de confirmação (excluir / cancelar) -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-caixa">
+      <div class="modal-icone" id="modal-icone"></div>
+      <h3 id="modal-titulo"></h3>
+      <div class="modal-resumo" id="modal-resumo"></div>
+      <p id="modal-texto"></p>
+      <div class="botoes">
+        <button class="btn" id="modal-ok"></button>
+        <button class="btn btn-contorno" id="modal-voltar">Voltar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
