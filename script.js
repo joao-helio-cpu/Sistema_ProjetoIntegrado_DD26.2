@@ -1,11 +1,11 @@
 /* =====================================================
    CASA ROSA - sistema de agendamento (HTML + CSS + JS)
    Os dados ficam salvos no navegador (localStorage).
-   Login de teste:  usuário maria.recepcao  |  senha 123456
+   Login de teste:  usuário maria  |  senha 123456
    ===================================================== */
 
 // ---------- Dados fixos ----------
-const USUARIOS = { "maria.recepcao": { senha: "123456", nome: "Maria" } };
+const USUARIOS = { "maria": { senha: "123456", nome: "Maria" } };
 const ESPECIALIDADES = ["Pré-natal", "Ultrassom", "Inserção de implanon", "Exame preventivo", "Fisioterapia",
   "Ginecologista", "Psicólogo(a)", "Hidroginástica", "Grupo de fibromialgia"];
 const STATUS = ["Agendada", "Reagendada", "Presente", "Ausente", "Cancelada"];
@@ -43,16 +43,7 @@ function dadosIniciais() {
   const h = new Date();
   const d = n => iso(somarDias(h, n));
   return [
-    { id: 1, nome: "Maria Souza", nasc: "1994-05-10", tel: "(88) 99999-0000", bairro: "Centro", esp: "Exame preventivo", data: d(0), hora: "08:00", prio: "Baixa", obs: "", status: "Presente", envio: "nao" },
-    { id: 2, nome: "Joana Lima", nasc: "1985-02-20", tel: "(88) 98888-1111", bairro: "Campo Velho", esp: "Ginecologista", data: d(0), hora: "08:30", prio: "Média", obs: "", status: "Presente", envio: "nao" },
-    { id: 3, nome: "Ana Paula Ribeiro", nasc: "1998-06-09", tel: "(88) 97777-2222", bairro: "Planalto", esp: "Pré-natal", data: d(0), hora: "09:15", prio: "Alta", obs: "Gestante", status: "Reagendada", envio: "nao" },
-    { id: 4, nome: "Carla Mendes", nasc: "1990-08-15", tel: "(88) 96666-3333", bairro: "Centro", esp: "Ultrassom", data: d(0), hora: "09:30", prio: "Média", obs: "", status: "Ausente", envio: "nao" },
-    { id: 5, nome: "Rita Costa", nasc: "2002-01-30", tel: "(88) 95555-4444", bairro: "Alto São Francisco", esp: "Inserção de implanon", data: d(0), hora: "10:45", prio: "Baixa", obs: "", status: "Agendada", envio: "nao" },
-    { id: 6, nome: "Edna Batista", nasc: "1979-03-12", tel: "(88) 94444-5555", bairro: "Centro", esp: "Psicólogo(a)", data: d(1), hora: "08:00", prio: "Média", obs: "", status: "Agendada", envio: "nao" },
-    { id: 7, nome: "Sônia Rocha", nasc: "1966-11-03", tel: "(88) 93333-6666", bairro: "Planalto", esp: "Hidroginástica", data: d(1), hora: "10:15", prio: "Baixa", obs: "", status: "Agendada", envio: "enviada" },
-    { id: 8, nome: "Vera Gomes", nasc: "1974-07-22", tel: "(88) 92222-7777", bairro: "Campo Velho", esp: "Grupo de fibromialgia", data: d(1), hora: "14:00", prio: "Baixa", obs: "", status: "Cancelada", envio: "nao" },
-    { id: 9, nome: "Helena Costa Barros", nasc: "1991-03-14", tel: "(88) 98877-66", bairro: "Campo Velho", esp: "Ginecologista", data: d(2), hora: "11:30", prio: "Média", obs: "", status: "Agendada", envio: "falha" },
-    { id: 10, nome: "Luzia Ferreira", nasc: "1971-09-01", tel: "(88) 91111-8888", bairro: "Combate", esp: "Fisioterapia", data: d(3), hora: "09:00", prio: "Baixa", obs: "Obesidade", status: "Agendada", envio: "nao" }
+    { id: 1, nome: "Maria Souza", nasc: "1994-05-10", tel: "(88) 99999-0000", bairro: "Centro", esp: "Exame preventivo", data: d(0), hora: "08:00", prio: "Baixa", obs: "", status: "Presente", envio: "nao" }
   ];
 }
 let consultas = JSON.parse(localStorage.getItem("cr_consultas")) || dadosIniciais();
